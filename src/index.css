@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .grid-cols-64 {
+    grid-template-columns: repeat(64, minmax(0, 1fr));
+  }
+}
