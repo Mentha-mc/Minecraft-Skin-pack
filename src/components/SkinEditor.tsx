@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Download } from 'lucide-react';
+import { Download, Box } from 'lucide-react';
 import SkinUploader from './SkinUploader';
 import SkinPreview from './SkinPreview';
 import SkinList from './SkinList';
@@ -84,92 +84,89 @@ const SkinEditor: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6">
-          Minecraft 皮肤包生成器
-        </h1>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="space-y-6">
-            <SkinUploader onSkinUpload={handleSkinUpload} onError={setError} />
-            
-            <div className="bg-white p-4 rounded-lg shadow-md">
-              <h3 className="text-lg font-semibold mb-4">皮肤包详情</h3>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    皮肤包名称
-                  </label>
-                  <input
-                    type="text"
-                    value={packName}
-                    onChange={(e) => setPackName(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    描述
-                  </label>
-                  <textarea
-                    value={packDescription}
-                    onChange={(e) => setPackDescription(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                    rows={3}
-                  />
-                </div>
-              </div>
+    <div className="space-y-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="space-y-6">
+          <SkinUploader onSkinUpload={handleSkinUpload} onError={setError} />
+          
+          <div className="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700">
+            <div className="flex items-center gap-2 mb-4">
+              <Box className="w-5 h-5 text-emerald-400" />
+              <h3 className="text-lg font-semibold">皮肤包详情</h3>
             </div>
-
-            <div className="bg-white p-4 rounded-lg shadow-md">
-              <h3 className="text-lg font-semibold mb-4">皮肤列表</h3>
-              <SkinList
-                skins={skins}
-                onDelete={handleSkinDelete}
-                onSelect={setSelectedSkinId}
-                selectedId={selectedSkinId}
-              />
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">
+                  皮肤包名称
+                </label>
+                <input
+                  type="text"
+                  value={packName}
+                  onChange={(e) => setPackName(e.target.value)}
+                  className="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">
+                  描述
+                </label>
+                <textarea
+                  value={packDescription}
+                  onChange={(e) => setPackDescription(e.target.value)}
+                  className="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors"
+                  rows={3}
+                />
+              </div>
             </div>
           </div>
 
-          <div className="space-y-6">
-            {selectedSkin && (
-              <>
-                <div className="bg-white p-4 rounded-lg shadow-md">
-                  <h3 className="text-lg font-semibold mb-4">模型类型</h3>
-                  <ModelSelector
-                    modelType={selectedSkin.modelType}
-                    onChange={handleModelTypeChange}
-                  />
-                </div>
-
-                <SkinPreview
-                  skinData={selectedSkin.pixels}
-                  width={selectedSkin.width}
-                  height={selectedSkin.height}
-                />
-              </>
-            )}
+          <div className="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700">
+            <h3 className="text-lg font-semibold mb-4">皮肤列表</h3>
+            <SkinList
+              skins={skins}
+              onDelete={handleSkinDelete}
+              onSelect={setSelectedSkinId}
+              selectedId={selectedSkinId}
+            />
           </div>
         </div>
 
-        {error && (
-          <div className="mt-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-md">
-            {error}
-          </div>
-        )}
+        <div className="space-y-6">
+          {selectedSkin && (
+            <>
+              <div className="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700">
+                <h3 className="text-lg font-semibold mb-4">模型类型</h3>
+                <ModelSelector
+                  modelType={selectedSkin.modelType}
+                  onChange={handleModelTypeChange}
+                />
+              </div>
 
-        <button
-          onClick={handleDownload}
-          className="mt-6 w-full p-4 bg-green-500 text-white rounded-lg hover:bg-green-600 flex items-center justify-center gap-2"
-          disabled={skins.length === 0}
-        >
-          <Download size={20} />
-          生成皮肤包 ({skins.length} 个皮肤)
-        </button>
+              <SkinPreview
+                skinData={selectedSkin.pixels}
+                width={selectedSkin.width}
+                height={selectedSkin.height}
+              />
+            </>
+          )}
+        </div>
       </div>
+
+      {error && (
+        <div className="p-4 bg-red-900/50 border border-red-500/50 text-red-200 rounded-lg">
+          {error}
+        </div>
+      )}
+
+      <button
+        onClick={handleDownload}
+        className="w-full p-4 bg-gradient-to-r from-emerald-500 to-blue-500 text-white rounded-lg hover:from-emerald-600 hover:to-blue-600 transition-all duration-200 flex items-center justify-center gap-2 font-medium shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+        disabled={skins.length === 0}
+      >
+        <Download className="w-5 h-5" />
+        生成皮肤包 ({skins.length} 个皮肤)
+      </button>
     </div>
   );
 };

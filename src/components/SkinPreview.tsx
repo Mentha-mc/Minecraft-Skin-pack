@@ -27,21 +27,23 @@ const SkinPreview: React.FC<SkinPreviewProps> = ({ skinData, width, height }) =>
   }, [skinData, width, height]);
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md">
-      <h3 className="text-lg font-semibold mb-2">皮肤预览</h3>
-      <div className="text-sm text-gray-600 mb-2">
+    <div className="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700">
+      <h3 className="text-lg font-semibold mb-2 text-gray-200">皮肤预览</h3>
+      <div className="text-sm text-gray-400 mb-4">
         尺寸: {width}x{height}
       </div>
-      <canvas
-        ref={canvasRef}
-        width={width}
-        height={height}
-        className="border border-gray-300 w-full"
-        style={{ 
-          imageRendering: 'pixelated',
-          background: 'repeating-casing-pattern(8px 8px, #FFFFFF11 0%, #00000011 100%)'
-        }}
-      />
+      <div className="bg-gray-900 p-4 rounded-lg">
+        <canvas
+          ref={canvasRef}
+          width={width}
+          height={height}
+          className="w-full border border-gray-700 rounded"
+          style={{ 
+            imageRendering: 'pixelated',
+            background: 'repeating-casing-pattern(8px 8px, rgba(255,255,255,0.03), rgba(0,0,0,0.03) 100%)'
+          }}
+        />
+      </div>
     </div>
   );
 };

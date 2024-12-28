@@ -24,14 +24,16 @@ const SkinUploader: React.FC<SkinUploaderProps> = ({ onSkinUpload, onError }) =>
   };
 
   return (
-    <div className="mb-6">
-      <label className="flex items-center justify-center w-full h-32 px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-blue-400 focus:outline-none">
+    <div>
+      <label className="flex flex-col items-center justify-center w-full h-40 px-4 transition-all duration-200 bg-gray-800 border-2 border-gray-700 border-dashed rounded-xl appearance-none cursor-pointer hover:border-emerald-500 hover:bg-gray-800/50">
         <div className="flex flex-col items-center space-y-2">
-          <Upload className="w-8 h-8 text-gray-400" />
-          <span className="font-medium text-gray-600">
+          <div className="p-3 rounded-full bg-gray-700">
+            <Upload className="w-6 h-6 text-emerald-400" />
+          </div>
+          <span className="font-medium text-gray-200">
             将 Minecraft 皮肤拖放到此处或点击上传
           </span>
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-gray-400">
             支持 64x32、64x64 和 128x128 的皮肤
           </span>
         </div>
